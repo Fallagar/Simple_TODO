@@ -1,0 +1,40 @@
+#liveTableBody {
+    >.hidden {
+    display: none;
+    }
+    >tr >td{
+        background-color: green;
+        -webkit-animation: newNote 3s ease-in-out forwards;
+                animation: newNote 3s ease-in-out forwards;
+    }
+}
+#archiveTableBody {
+    >tr {
+        display: none;
+    }
+    >.hidden {
+        display: table-row;
+    }
+}
+
+@-webkit-keyframes newNote {
+    0% {
+        background-color: green;
+       color: white;
+    }
+    100% {
+        background-color: transparent ;
+        color: black;
+    }
+}
+
+@keyframes newNote {
+    0% {
+        background-color: green;
+       color: white;
+    }
+    100% {
+        background-color: transparent;
+        color: black;
+    }
+}
