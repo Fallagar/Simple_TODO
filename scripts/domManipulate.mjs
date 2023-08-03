@@ -1,7 +1,7 @@
 import { cloneArchiveNoteButton, cloneNotesTableRow } from "./clone.mjs";
 import { cloneAddNoteButton } from "./clone.mjs";
 import { cloneRemoveNoteButton } from "./clone.mjs";
-import { getNoteFromDB, getSummary, handleArchivate, handleDelete } from "./handle.mjs";
+import { getIcon, getNoteFromDB, getSummary, handleArchivate, handleDelete } from "./handle.mjs";
 
 
 const liveTableBody = document.querySelector("#liveTableBody")
@@ -16,28 +16,29 @@ const summaryThought = document.querySelector("#summary-thought")
 export function addNoteNode(data, targetTable = liveTableBody) {
     const node = cloneNotesTableRow()
     const editButton = cloneAddNoteButton()
-    editButton.innerText = "Edit"
-    editButton.addEventListener("click", (e) => {
+    editButton.innerHTML = '<i class="fa-solid fa-pen-to-square"></i>'
+    editButton.addEventListener("click", () => {
         addNoteForm.setAttribute("purpose", "edit"),
         addNoteForm.setAttribute("dbtarget", data.id)    
         const result = getNoteFromDB(data.id)
         populateEditForm(result)
     })
     const removeButton = cloneRemoveNoteButton();
-    removeButton.addEventListener("click", (e) => {
-        console.log("click")
+    removeButton.addEventListener("click", () => {        
         const result = handleDelete(data.id);        
         repopulateDOM(result)
     })
     const arhiveButton = cloneArchiveNoteButton()
-    arhiveButton.addEventListener("click", (e) => {
-        console.log("click")
+    arhiveButton.addEventListener("click", () => {        
         const result = handleArchivate(data.id);        
         repopulateDOM(result)
     })
     try {
-        const children = [...node.children];        
-        children[0].innerText = data.name;
+        const icon = getIcon(data.category)
+        const nameSpan = `<span class="mx-2">${data.name}</span>`
+        const children = [...node.children];
+        
+        children[0].innerHTML = icon + nameSpan;
         children[1].innerText = data.created;
         children[2].innerText = data.category;
         children[3].innerText = data.content;
@@ -55,13 +56,11 @@ export function addNoteNode(data, targetTable = liveTableBody) {
 }
 
 // SETTING DEFAULT FIELDS IF EDITING
-function populateEditForm(data) {
-    console.log(data)
+function populateEditForm(data) {    
     const name = document.querySelector("#name")
     const category = document.querySelector("#category")
     const content = document.querySelector("#content")
-    name.setAttribute("value", data.name)
-    console.log(data.category);
+    name.setAttribute("value", data.name)    
     switch (data.category) {        
         case "Task":
             category.selectedIndex = 0;            
@@ -86,8 +85,7 @@ export function resetFields() {
     
     name.removeAttribute("value")    
    category.removeAttribute("value")
-    content.innerText = "";
-    console.log("all removed")
+    content.innerText = "";    
 }
 
 //REPOPULATE DOM BASED ON DATA
@@ -96,10 +94,8 @@ export function repopulateDOM(data) {
     archiveTableBody.innerHTML = "";
     data.map((item) => {
         item.status === "live" ? addNoteNode(item) : addNoteNode(item, archiveTableBody)        
-    })
-    console.log(data)
-    const result = getSummary();
-    console.log(result)
+    })    
+    const result = getSummary();    
     populateSummary(result)
 }
 

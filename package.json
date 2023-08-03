@@ -8,8 +8,5 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "sass": "^1.64.2"
-  }
+  "license": "ISC"
 }

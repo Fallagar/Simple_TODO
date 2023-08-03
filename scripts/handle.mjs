@@ -5,6 +5,7 @@ import { resetFields } from "./domManipulate.mjs";
 import { getId } from "./data.mjs";
 import { increaseId } from "./data.mjs";
 
+
 export const mockData = [
   {
     name: "Do push-ups",
@@ -93,9 +94,8 @@ class Note {
         this.created = created || new Date().toLocaleDateString("en-GB", {month: "short", day: "numeric", year: "numeric"})
     }
     getDates(string) {
-        const pattern = /\d{2}\/\d{2}\/\d{4}|\d\/\d{2}\/\d{4}/g;
-        const matches = string.match(pattern);
-        console.log(matches)
+        const pattern = /\d{1,2}\/\d{1,2}\/\d{4}/g;
+        const matches = string.match(pattern);        
         return matches || [];
     }
     setDates(string) {
@@ -158,13 +158,11 @@ export function handleForm(formData, form) {
         if (purpose === "add") {
             const note = new Note(formData.name, formData.category, formData.content, "live")        
             const fetchData = getData()
-            const newData = setData([...fetchData, note])        
-            resetFields()
+            const newData = setData([...fetchData, note])      
             return newData
         }
         if (purpose === "edit") {
             const result = handleFormEdit(formData, form)
-            resetFields()
             return result;
         } else {
             throw new Error("Form error")
@@ -181,13 +179,11 @@ export function handleFormEdit(formData, form) {
         const target = form.getAttribute("dbtarget");
         const DB = getData();        
         const index = DB.findIndex((element) => element.id === +target)             
-        if (index >= 0 && index < DB.length) {
-            console.log("index is", DB[index])
+        if (index >= 0 && index < DB.length) {            
             DB[index].name = formData.name
             DB[index].content = formData.content
             DB[index].category = formData.category
-            DB[index].setDates(formData.content)
-            console.log("changed is", DB[index])
+            DB[index].setDates(formData.content)            
             const result = setData(DB)
             return result
         }
@@ -269,4 +265,26 @@ export function getSummary() {
        alert(error)
         return getData();
     }
+}
+
+export function getIcon(category) {
+    const icon = chooseIcon(category);
+    return icon;
+}
+function chooseIcon(category) {
+    let icon;
+    switch (category) {
+        case "Idea":
+            icon = '<i class="fa-regular fa-lightbulb"></i>'
+            break;
+        case "Task":
+            icon = '<i class="fa-solid fa-thumbtack"></i>'
+            break;
+        case "Random Thought":
+            icon = '<i class="fa-solid fa-brain"></i>';
+            break;
+        default: 
+            icon = '<i class="fa-solid fa-thumbtack"></i>'
+    }
+    return icon;
 }

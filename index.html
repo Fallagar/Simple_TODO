@@ -10,6 +10,16 @@
       integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
       crossorigin="anonymous"
     />
+    <script
+      src="https://kit.fontawesome.com/680c63def8.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
@@ -76,89 +86,165 @@
         </div>
       </div>
     </div>
-    <div></div>
     <div id="root">
-      <div id="liveTable-container">
-        <div>Current Notes</div>
-        <table class="table">
+      <div id="liveTable-container" class="p-5 d-flex flex-column">
+        <div
+          class="text-white bg-success bold"
+          style="
+            font-size: 32px;
+            padding: 5px 10px;
+            width: fit-content;
+            border-radius: 0.315rem;
+          "
+        >
+          Current Notes
+        </div>
+        <table class="table table-borderless table-hover">
           <thead>
             <tr>
-              <th scope="col" class="col-1">Name</th>
-              <th scope="col" class="col-1">Created</th>
-              <th scope="col" class="col-1">Category</th>
-              <th scope="col" class="col-5">Content</th>
-              <th scope="col" class="col-2">Dates</th>
-              <th scope="col" class="col-2">Controls</th>
+              <th
+                scope="col"
+                class="col-1 bg-success text-white border-radius-left"
+              >
+                Name
+              </th>
+              <th scope="col" class="col-1 bg-success text-white">Created</th>
+              <th scope="col" class="col-1 bg-success text-white">Category</th>
+              <th scope="col" class="col-5 bg-success text-white">Content</th>
+              <th scope="col" class="col-2 bg-success text-white">Dates</th>
+              <th
+                scope="col"
+                class="col-1 bg-success text-white border-radius-right"
+              >
+                Controls
+              </th>
             </tr>
           </thead>
           <tbody id="liveTableBody">
             <tr id="notesTableRow" style="display: none">
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>
+              <td
+                class="bg-light border-radius-left"
+                style="font-weight: bold"
+              ></td>
+              <td class="bg-light"></td>
+              <td class="bg-light"></td>
+              <td class="bg-light" style="font-weight: bold"></td>
+              <td class="bg-light"></td>
+              <td class="bg-light border-radius-right">
                 <button class="btn btn-warning" id="archiveNoteButton">
-                  Archive
+                  <i class="fa-regular fa-circle-down"></i>
                 </button>
                 <button class="btn btn-danger" id="removeNoteButton">
-                  Remove
+                  <i class="fa-solid fa-trash-can"></i>
                 </button>
               </td>
             </tr>
           </tbody>
         </table>
+
+        <button
+          type="button"
+          class="btn btn-success"
+          data-bs-toggle="modal"
+          data-bs-target="#addNoteModal"
+          id="addNoteButton"
+        >
+          <i class="fa-solid fa-circle-plus"></i
+          ><span class="mx-1">Add Note</span>
+        </button>
       </div>
-      <button
-        type="button"
-        class="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#addNoteModal"
-        id="addNoteButton"
-      >
-        Add Note
-      </button>
-      <div id="summaryTable-container">
-        <div>Summary</div>
-        <table class="table">
+      <div id="summaryTable-container" class="p-5 d-flex flex-column">
+        <div
+          class="text-white bg-dark bold"
+          style="
+            font-size: 32px;
+            padding: 5px 10px;
+            width: fit-content;
+            border-radius: 0.315rem;
+          "
+        >
+          Summary
+        </div>
+        <table class="table table-borderless table-hover">
           <thead>
             <tr>
-              <th scope="col" class="col-4">Note Category</th>
-              <th scope="col" class="col-4">Active</th>
-              <th scope="col" class="col-4">Archived</th>
+              <th
+                scope="col"
+                class="col-4 bg-dark text-white border-radius-left"
+              >
+                Note Category
+              </th>
+              <th scope="col" class="col-4 bg-dark text-white">Active</th>
+              <th
+                scope="col"
+                class="col-4 bg-dark text-white border-radius-right"
+              >
+                Archived
+              </th>
             </tr>
           </thead>
           <tbody>
             <tr id="summary-task">
-              <td>Task</td>
-              <td></td>
-              <td></td>
+              <td class="bg-light border-radius-left" style="font-weight: bold">
+                <i class="fa-solid fa-thumbtack"></i
+                ><span class="mx-2">Task</span>
+              </td>
+              <td class="bg-light" style="font-weight: bold"></td>
+              <td
+                class="bg-light border-radius-right"
+                style="font-weight: bold"
+              ></td>
             </tr>
             <tr id="summary-thought">
-              <td>Random Thought</td>
-              <td></td>
-              <td></td>
+              <td class="bg-light border-radius-left" style="font-weight: bold">
+                <i class="fa-solid fa-brain"></i
+                ><span class="mx-2">Random Thought</span>
+              </td>
+              <td class="bg-light" style="font-weight: bold"></td>
+              <td
+                class="bg-light border-radius-right"
+                style="font-weight: bold"
+              ></td>
             </tr>
             <tr id="summary-idea">
-              <td>Idea</td>
-              <td></td>
-              <td></td>
+              <td class="bg-light border-radius-left" style="font-weight: bold">
+                <i class="fa-regular fa-lightbulb"></i>
+                <span class="mx-2">Idea</span>
+              </td>
+              <td class="bg-light" style="font-weight: bold"></td>
+              <td
+                class="bg-light border-radius-right"
+                style="font-weight: bold"
+              ></td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div id="archiveTable-container">
-        <div>Archive</div>
-        <table class="table">
+      <div id="archiveTable-container" class="p-5 d-flex flex-column">
+        <div
+          class="text-dark bg-warning bold"
+          style="
+            font-size: 32px;
+            padding: 5px 10px;
+            width: fit-content;
+            border-radius: 0.315rem;
+          "
+        >
+          Archive
+        </div>
+        <table class="table table-borderless table-hover">
           <thead>
             <tr>
-              <th scope="col" class="col-1">Name</th>
-              <th scope="col" class="col-1">Created</th>
-              <th scope="col" class="col-1">Category</th>
-              <th scope="col" class="col-5">Content</th>
-              <th scope="col" class="col-2">Dates</th>
-              <th scope="col" class="col-2">Controls</th>
+              <th scope="col" class="col-1 bg-warning border-radius-left">
+                Name
+              </th>
+              <th scope="col" class="col-1 bg-warning">Created</th>
+              <th scope="col" class="col-1 bg-warning">Category</th>
+              <th scope="col" class="col-5 bg-warning">Content</th>
+              <th scope="col" class="col-2 bg-warning">Dates</th>
+              <th scope="col" class="col-1 bg-warning border-radius-right">
+                Controls
+              </th>
             </tr>
           </thead>
           <tbody id="archiveTableBody"></tbody>
@@ -170,6 +256,6 @@
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
       crossorigin="anonymous"
     ></script>
-    <script src="scripts/script.js" type="module"></script>
+    <script src="./scripts/script.js" type="module"></script>
   </body>
 </html>

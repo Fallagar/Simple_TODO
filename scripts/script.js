@@ -1,5 +1,4 @@
 import { handleForm, seed } from "./handle.mjs"
-import { addNoteNode } from "./domManipulate.mjs"
 import { getData } from "./data.mjs"
 import { setData } from "./data.mjs"
 import { resetFields } from "./domManipulate.mjs"
@@ -17,8 +16,9 @@ window.onload = () => {
             const updatedStyle = addNoteModal.getAttribute('style');
           if (updatedStyle === "display: none;") {              
                 addNoteForm.setAttribute("purpose", "add")
-                addNoteForm.removeAttribute("dbtaget") 
-                resetFields()
+            addNoteForm.removeAttribute("dbtaget") 
+            resetFields()
+            addNoteForm.reset()
             }            
                 
         }
@@ -41,7 +41,7 @@ window.onload = () => {
         const formDataObj = Object.fromEntries(formData.entries())
         const newNote = handleForm(formDataObj, addNoteForm)
         repopulateDOM(newNote)
-        modalCloseButton.click()
+      modalCloseButton.click()      
     })
 
 }
