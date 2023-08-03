@@ -1,40 +1,65 @@
-#liveTableBody {
-    >.hidden {
-    display: none;
-    }
-    >tr >td{
-        background-color: green;
-        -webkit-animation: newNote 3s ease-in-out forwards;
-                animation: newNote 3s ease-in-out forwards;
-    }
-}
-#archiveTableBody {
-    >tr {
-        display: none;
-    }
-    >.hidden {
-        display: table-row;
-    }
-}
+// #liveTableBody {
+//     >.hidden {
+//     display: none;
+//     }
+//     >tr >td{
+//         background-color: green;
+//         -webkit-animation: newNote 3s ease-in-out forwards;
+//                 animation: newNote 3s ease-in-out forwards;
+//     }
+// }
+// #archiveTableBody {
+//     >tr {
+//         display: none;
+//     }
+//     >.hidden {
+//         display: table-row;
+//         >td {
+//                 background-color: green;
+//                 -webkit-animation: archiveNote 3s ease-in-out forwards;
+//                 animation: archiveNote 3s ease-in-out forwards;
+//             }
+//     }
+// }
 
-@-webkit-keyframes newNote {
-    0% {
-        background-color: green;
-       color: white;
-    }
-    100% {
-        background-color: transparent ;
-        color: black;
-    }
-}
+// @-webkit-keyframes newNote {
+//     0% {
+//         background-color: green;
+//        color: white;
+//     }
+//     100% {
+//         background-color: transparent ;
+//         color: black;
+//     }
+// }
 
-@keyframes newNote {
-    0% {
-        background-color: green;
-       color: white;
-    }
-    100% {
-        background-color: transparent;
-        color: black;
-    }
-}
+// @keyframes newNote {
+//     0% {
+//         background-color: green;
+//        color: white;
+//     }
+//     100% {
+//         background-color: transparent;
+//         color: black;
+//     }
+// }
+// @-webkit-keyframes archiveNote {
+//     0% {
+//         background-color: yellow;
+//        color: white;
+//     }
+//     100% {
+//         background-color: transparent;
+//         color: black;
+//     }
+// }
+// @keyframes archiveNote {
+//     0% {
+//         background-color: yellow;
+       
+//     }
+//     100% {
+//         background-color: transparent;
+        
+//     }
+// }

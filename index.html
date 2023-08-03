@@ -13,13 +13,163 @@
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <div id="root"></div>
+    <div
+      class="modal fade"
+      id="addNoteModal"
+      tabindex="-1"
+      aria-labelledby="addNoteModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="addNoteModalLabel">Modal title</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form
+              id="addNoteForm"
+              style="display: flex; flex-direction: column"
+              purpose="add"
+            >
+              <label for="name">Name</label>
+              <input type="text" name="name" id="name" required />
+              <label for="category">Category</label>
+              <select type="text" name="category" id="category" required>
+                <option value="Task">Task</option>
+                <option value="Idea">Idea</option>
+                <option value="Random Thought">Random Thought</option>
+              </select>
+              <label for="content">Content</label>
+              <textarea
+                type="text"
+                name="content"
+                id="content"
+                required
+              ></textarea>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+              id="modalCloseButton"
+            >
+              Close
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              data-bs-dismiss=""
+              id="saveFormButton"
+              form="addNoteForm"
+            >
+              Save changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div></div>
+    <div id="root">
+      <div id="liveTable-container">
+        <div>Current Notes</div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col" class="col-1">Name</th>
+              <th scope="col" class="col-1">Created</th>
+              <th scope="col" class="col-1">Category</th>
+              <th scope="col" class="col-5">Content</th>
+              <th scope="col" class="col-2">Dates</th>
+              <th scope="col" class="col-2">Controls</th>
+            </tr>
+          </thead>
+          <tbody id="liveTableBody">
+            <tr id="notesTableRow" style="display: none">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>
+                <button class="btn btn-warning" id="archiveNoteButton">
+                  Archive
+                </button>
+                <button class="btn btn-danger" id="removeNoteButton">
+                  Remove
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#addNoteModal"
+        id="addNoteButton"
+      >
+        Add Note
+      </button>
+      <div id="summaryTable-container">
+        <div>Summary</div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col" class="col-4">Note Category</th>
+              <th scope="col" class="col-4">Active</th>
+              <th scope="col" class="col-4">Archived</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="summary-task">
+              <td>Task</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr id="summary-thought">
+              <td>Random Thought</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr id="summary-idea">
+              <td>Idea</td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="archiveTable-container">
+        <div>Archive</div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col" class="col-1">Name</th>
+              <th scope="col" class="col-1">Created</th>
+              <th scope="col" class="col-1">Category</th>
+              <th scope="col" class="col-5">Content</th>
+              <th scope="col" class="col-2">Dates</th>
+              <th scope="col" class="col-2">Controls</th>
+            </tr>
+          </thead>
+          <tbody id="archiveTableBody"></tbody>
+        </table>
+      </div>
+    </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
       crossorigin="anonymous"
     ></script>
-    <script src="./scripts/script.js" type="module"></script>
-    <script src="./scripts/clone.mjs" type="module"></script>
+    <script src="scripts/script.js" type="module"></script>
   </body>
 </html>
