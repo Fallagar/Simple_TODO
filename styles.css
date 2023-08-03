@@ -1,24 +1,41 @@
-#liveTableBody > .hidden {
-  display: none;
-}
-#liveTableBody > tr > td {
-  background-color: green;
-  animation: newNote 3s ease-in-out forwards;
+.liveTable-container {
+  width: 100%;
 }
 
-#archiveTableBody > tr {
-  display: none;
+#liveTable-container {
+  transition: height 300ms linear;
 }
-#archiveTableBody > .hidden {
-  display: table-row;
+
+#addNoteButton {
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
 }
-@keyframes newNote {
-  0% {
-    background-color: green;
-    color: white;
-  }
-  100% {
-    background-color: transparent;
-    color: black;
-  }
+
+table {
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+.border-radius-left {
+  border-top-left-radius: 0.315rem;
+  border-bottom-left-radius: 0.315rem;
+}
+
+.border-radius-right {
+  border-top-right-radius: 0.315rem;
+  border-bottom-right-radius: 0.315rem;
+}
+
+td {
+  vertical-align: middle;
+}
+
+button {
+  font-family: "Roboto Mono", monospace !important;
+  margin: 0px 2px;
+}
+
+#archiveTableBody > tr > td > button:nth-child(1) {
+  transform: rotate(180deg);
 }/*# sourceMappingURL=styles.css.map */

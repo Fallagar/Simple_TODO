@@ -10,16 +10,252 @@
       integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
       crossorigin="anonymous"
     />
+    <script
+      src="https://kit.fontawesome.com/680c63def8.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <div id="root"></div>
+    <div
+      class="modal fade"
+      id="addNoteModal"
+      tabindex="-1"
+      aria-labelledby="addNoteModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="addNoteModalLabel">Modal title</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form
+              id="addNoteForm"
+              style="display: flex; flex-direction: column"
+              purpose="add"
+            >
+              <label for="name">Name</label>
+              <input type="text" name="name" id="name" required />
+              <label for="category">Category</label>
+              <select type="text" name="category" id="category" required>
+                <option value="Task">Task</option>
+                <option value="Idea">Idea</option>
+                <option value="Random Thought">Random Thought</option>
+              </select>
+              <label for="content">Content</label>
+              <textarea
+                type="text"
+                name="content"
+                id="content"
+                required
+              ></textarea>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+              id="modalCloseButton"
+            >
+              Close
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              data-bs-dismiss=""
+              id="saveFormButton"
+              form="addNoteForm"
+            >
+              Save changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="root">
+      <div id="liveTable-container" class="p-5 d-flex flex-column">
+        <div
+          class="text-white bg-success bold"
+          style="
+            font-size: 32px;
+            padding: 5px 10px;
+            width: fit-content;
+            border-radius: 0.315rem;
+          "
+        >
+          Current Notes
+        </div>
+        <table class="table table-borderless table-hover">
+          <thead>
+            <tr>
+              <th
+                scope="col"
+                class="col-1 bg-success text-white border-radius-left"
+              >
+                Name
+              </th>
+              <th scope="col" class="col-1 bg-success text-white">Created</th>
+              <th scope="col" class="col-1 bg-success text-white">Category</th>
+              <th scope="col" class="col-5 bg-success text-white">Content</th>
+              <th scope="col" class="col-2 bg-success text-white">Dates</th>
+              <th
+                scope="col"
+                class="col-1 bg-success text-white border-radius-right"
+              >
+                Controls
+              </th>
+            </tr>
+          </thead>
+          <tbody id="liveTableBody">
+            <tr id="notesTableRow" style="display: none">
+              <td
+                class="bg-light border-radius-left"
+                style="font-weight: bold"
+              ></td>
+              <td class="bg-light"></td>
+              <td class="bg-light"></td>
+              <td class="bg-light" style="font-weight: bold"></td>
+              <td class="bg-light"></td>
+              <td class="bg-light border-radius-right">
+                <button class="btn btn-warning" id="archiveNoteButton">
+                  <i class="fa-regular fa-circle-down"></i>
+                </button>
+                <button class="btn btn-danger" id="removeNoteButton">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <button
+          type="button"
+          class="btn btn-success"
+          data-bs-toggle="modal"
+          data-bs-target="#addNoteModal"
+          id="addNoteButton"
+        >
+          <i class="fa-solid fa-circle-plus"></i
+          ><span class="mx-1">Add Note</span>
+        </button>
+      </div>
+      <div id="summaryTable-container" class="p-5 d-flex flex-column">
+        <div
+          class="text-white bg-dark bold"
+          style="
+            font-size: 32px;
+            padding: 5px 10px;
+            width: fit-content;
+            border-radius: 0.315rem;
+          "
+        >
+          Summary
+        </div>
+        <table class="table table-borderless table-hover">
+          <thead>
+            <tr>
+              <th
+                scope="col"
+                class="col-4 bg-dark text-white border-radius-left"
+              >
+                Note Category
+              </th>
+              <th scope="col" class="col-4 bg-dark text-white">Active</th>
+              <th
+                scope="col"
+                class="col-4 bg-dark text-white border-radius-right"
+              >
+                Archived
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="summary-task">
+              <td class="bg-light border-radius-left" style="font-weight: bold">
+                <i class="fa-solid fa-thumbtack"></i
+                ><span class="mx-2">Task</span>
+              </td>
+              <td class="bg-light" style="font-weight: bold"></td>
+              <td
+                class="bg-light border-radius-right"
+                style="font-weight: bold"
+              ></td>
+            </tr>
+            <tr id="summary-thought">
+              <td class="bg-light border-radius-left" style="font-weight: bold">
+                <i class="fa-solid fa-brain"></i
+                ><span class="mx-2">Random Thought</span>
+              </td>
+              <td class="bg-light" style="font-weight: bold"></td>
+              <td
+                class="bg-light border-radius-right"
+                style="font-weight: bold"
+              ></td>
+            </tr>
+            <tr id="summary-idea">
+              <td class="bg-light border-radius-left" style="font-weight: bold">
+                <i class="fa-regular fa-lightbulb"></i>
+                <span class="mx-2">Idea</span>
+              </td>
+              <td class="bg-light" style="font-weight: bold"></td>
+              <td
+                class="bg-light border-radius-right"
+                style="font-weight: bold"
+              ></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="archiveTable-container" class="p-5 d-flex flex-column">
+        <div
+          class="text-dark bg-warning bold"
+          style="
+            font-size: 32px;
+            padding: 5px 10px;
+            width: fit-content;
+            border-radius: 0.315rem;
+          "
+        >
+          Archive
+        </div>
+        <table class="table table-borderless table-hover">
+          <thead>
+            <tr>
+              <th scope="col" class="col-1 bg-warning border-radius-left">
+                Name
+              </th>
+              <th scope="col" class="col-1 bg-warning">Created</th>
+              <th scope="col" class="col-1 bg-warning">Category</th>
+              <th scope="col" class="col-5 bg-warning">Content</th>
+              <th scope="col" class="col-2 bg-warning">Dates</th>
+              <th scope="col" class="col-1 bg-warning border-radius-right">
+                Controls
+              </th>
+            </tr>
+          </thead>
+          <tbody id="archiveTableBody"></tbody>
+        </table>
+      </div>
+    </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
       crossorigin="anonymous"
     ></script>
     <script src="./scripts/script.js" type="module"></script>
-    <script src="./scripts/clone.mjs" type="module"></script>
   </body>
 </html>
