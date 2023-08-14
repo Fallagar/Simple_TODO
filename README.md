@@ -1,10 +1,8 @@
-# Your Project Name
-
-Radency - test1
+# TODO List
 
 ## Description
 
-Simple TODO list
+Simple TODO list using Vanilla JS + Bootstrap + Modules
 
 ## Installation and Usage
 
